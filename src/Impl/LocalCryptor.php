@@ -17,7 +17,7 @@ class LocalCryptor implements Cryptor
     public function __construct(array $config)
     {
         $this->sm4Key = $config["sm4_key"];
-        $this->hmacKey = base64_decode($config["hmac_key"]);
+        $this->hmacKey = hex2bin($config["hmac_key"]);
 
         $this->sm4Cryptor = new Sm4($this->sm4Key);
     }
