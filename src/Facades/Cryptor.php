@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Class Cryptor
  * @package Oh86\SmCryptor\Facades
+ * @method \Oh86\SmCryptor\Cryptor driver(?string $driver)
  * @method string sm3(string $text)
  * @method string hmacSm3(string $text)
  * @method string sm4Encrypt(string $text)
@@ -23,6 +24,6 @@ class Cryptor extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Oh86\SmCryptor\Cryptor::class;
+        return \Oh86\SmCryptor\SmCryptorManager::class;
     }
 }

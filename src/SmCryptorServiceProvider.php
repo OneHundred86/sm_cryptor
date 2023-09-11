@@ -14,8 +14,12 @@ class SmCryptorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Cryptor::class, function () {
-            return Factory::createCryptor(config("sm_cryptor.driver"));
+        $this->app->singleton(SmCryptorManager::class, function () {
+            return new SmCryptorManager(config("sm_cryptor"));
+        });
+
+        $this->app->singleton(Cryptor::class, function (){
+            return app(SmCryptorManager::class)->driver();
         });
     }
 
