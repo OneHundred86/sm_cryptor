@@ -10,10 +10,13 @@ class TelecomCryptor implements Cryptor
 {
     private \Oh86\TelecomCryptor\Cryptor $cryptor;
 
-    public function __construct(array $config) {
+    /**
+     * @param array{host: string, ak: string, sk: string, eds_node: string, svs_node: string, sm4_key_index: int, hmac_key_index: int} $config
+     */
+    public function __construct(array $config)
+    {
         $this->cryptor = new \Oh86\TelecomCryptor\Cryptor($config);
     }
-
 
     public function sm3(string $text): string
     {
