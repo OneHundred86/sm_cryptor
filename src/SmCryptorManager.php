@@ -6,6 +6,7 @@ namespace Oh86\SmCryptor;
 
 use Oh86\SmCryptor\Impl\LocalCryptor;
 use Oh86\SmCryptor\Impl\TelecomCryptor;
+use Oh86\SmCryptor\Impl\UnicomCryptor;
 
 /**
  * @mixin Cryptor
@@ -47,6 +48,8 @@ class SmCryptorManager
             return new LocalCryptor($this->config[$driver]);
         }elseif($driver == "telecom") {
             return new TelecomCryptor($this->config[$driver]);
+        }elseif($driver == "unicom"){
+            return new UnicomCryptor($this->config[$driver]);
         }
 
         throw new \RuntimeException("不支持该驱动: $driver");

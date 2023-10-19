@@ -4,8 +4,10 @@
 namespace Oh86\SmCryptor\Impl;
 
 
+use Oh86\Sm\Exceptions\Exception;
 use Oh86\Sm\Sm4;
 use Oh86\SmCryptor\Cryptor;
+use Oh86\SmCryptor\Exceptions\SmCryptorException;
 
 class LocalCryptor implements Cryptor
 {
@@ -33,20 +35,26 @@ class LocalCryptor implements Cryptor
     }
 
     /**
-     * @throws \Oh86\Sm\Exceptions\SM4KeyException
-     * @throws \Oh86\Sm\Exceptions\SM4EncryptException
+     * @throws SmCryptorException
      */
     public function sm4Encrypt(string $text): string
     {
-        return $this->sm4Cryptor->encrypt($text);
+        try {
+            return $this->sm4Cryptor->encrypt($text);
+        } catch (Exception $e) {
+            throw new SmCryptorException($e->getMessage());
+        }
     }
 
     /**
-     * @throws \Oh86\Sm\Exceptions\SM4KeyException
-     * @throws \Oh86\Sm\Exceptions\SM4Exception
+     * @throws SmCryptorException
      */
     public function sm4Decrypt(string $cipherText): string
     {
-        return $this->sm4Cryptor->decrypt($cipherText);
+        try {
+            return $this->sm4Cryptor->decrypt($cipherText);
+        } catch (Exception $e) {
+            throw new SmCryptorException($e->getMessage());
+        }
     }
 }

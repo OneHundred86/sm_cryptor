@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // local / telecom
+    // local / telecom / unicom
     "driver" => env("SM_CRYPTOR_DRIVER", "local"),
 
     // 本地加解密
@@ -19,5 +19,13 @@ return [
         "svs_node" => env("TELECOM_SVS_NODE"),
         "sm4_key_index" => (int)env("TELECOM_ENCRYPTOR_SM4_KEY_INDEX"),
         "hmac_key_index" => (int)env("TELECOM_ENCRYPTOR_HMAC_KEY_INDEX"),
+    ],
+
+    // 联通密码池加解密
+    "unicom" => [
+        "host" => env("UNICOM_ENCRYPTOR_HOST"),
+        "access_key" => env("UNICOM_ENCRYPTOR_AK"),
+        "secret_key" => env("UNICOM_ENCRYPTOR_SK"),
+        "sm4_key_index" => env("UNICOM_ENCRYPTOR_SM4_KEY_INDEX"),
     ],
 ];

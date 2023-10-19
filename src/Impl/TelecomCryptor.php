@@ -4,7 +4,13 @@
 namespace Oh86\SmCryptor\Impl;
 
 
+use GuzzleHttp\Exception\GuzzleException;
 use Oh86\SmCryptor\Cryptor;
+use Oh86\SmCryptor\Exceptions\SmCryptorException;
+use Oh86\TelecomCryptor\Exceptions\DecryptException;
+use Oh86\TelecomCryptor\Exceptions\EncryptException;
+use Oh86\TelecomCryptor\Exceptions\FetchTokenException;
+use Oh86\TelecomCryptor\Exceptions\HMACException;
 
 class TelecomCryptor implements Cryptor
 {
@@ -24,33 +30,47 @@ class TelecomCryptor implements Cryptor
     }
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Oh86\TelecomCryptor\Exceptions\HMACException
-     * @throws \Oh86\TelecomCryptor\Exceptions\FetchTokenException
+     * @throws SmCryptorException
+     * @throws GuzzleException
      */
     public function hmacSm3(string $text): string
     {
-        return $this->cryptor->hmac($text, "SGD_SM3_HMAC");
+        try {
+            return $this->cryptor->hmac($text, "SGD_SM3_HMAC");
+        } catch (FetchTokenException $e) {
+            throw new SmCryptorException($e->getMessage());
+        } catch (HMACException $e) {
+            throw new SmCryptorException($e->getMessage());
+        }
     }
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Oh86\TelecomCryptor\Exceptions\EncryptException
-     * @throws \Oh86\TelecomCryptor\Exceptions\FetchTokenException
+     * @throws SmCryptorException
+     * @throws GuzzleException
      */
     public function sm4Encrypt(string $text): string
     {
-        return $this->cryptor->sm4Encrypt($text);
+        try {
+            return $this->cryptor->sm4Encrypt($text);
+        } catch (EncryptException $e) {
+            throw new SmCryptorException($e->getMessage());
+        } catch (FetchTokenException $e) {
+            throw new SmCryptorException($e->getMessage());
+        }
     }
 
-
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Oh86\TelecomCryptor\Exceptions\FetchTokenException
-     * @throws \Oh86\TelecomCryptor\Exceptions\DecryptException
+     * @throws SmCryptorException
+     * @throws GuzzleException
      */
     public function sm4Decrypt(string $cipherText): string
     {
-        return $this->cryptor->sm4Decrypt($cipherText);
+        try {
+            return $this->cryptor->sm4Decrypt($cipherText);
+        } catch (DecryptException $e) {
+            throw new SmCryptorException($e->getMessage());
+        } catch (FetchTokenException $e) {
+            throw new SmCryptorException($e->getMessage());
+        }
     }
 }
