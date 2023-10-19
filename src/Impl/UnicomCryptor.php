@@ -79,13 +79,13 @@ class UnicomCryptor implements Cryptor
      */
     public function sm4Decrypt(string $cipherText): string
     {
-        $text = base64_encode(hex2bin($cipherText));
+        $text = hex2bin($cipherText);
         try {
             $outData = $this->clientV1->decrypt(base64_encode($text), $this->getSessionKeyContext());
         } catch (CryptorException $e) {
             throw $this->toSmCryptorException($e);
         }
 
-        return bin2hex((base64_decode($outData)));
+        return base64_decode($outData);
     }
 }
