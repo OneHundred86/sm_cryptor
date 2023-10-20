@@ -6,6 +6,8 @@ php artisan vendor:publish --provider='Oh86\SmCryptor\SmCryptorServiceProvider'
 
 ##### 2.配置env
 ```dotenv
+# 国密驱动
+SM_CRYPTOR_DRIVER=local
 # 本地密钥
 SM4_KEY=4f17d993e1c602bc7cfa92377e223e6b    # hex，32位
 HMAC_KEY=7725db43aa18e3702719f9c15702a7cf   # hex
@@ -22,8 +24,10 @@ UNICOM_ENCRYPTOR_HOST=http://10.10.32.82:8415
 UNICOM_ENCRYPTOR_AK=
 UNICOM_ENCRYPTOR_SK=
 UNICOM_ENCRYPTOR_SM4_KEY_INDEX=xxxtSM4
-# 国密驱动
-SM_CRYPTOR_DRIVER=local
+# 先配置上面配置，然后执行命令生成配置后再配置：php artisan sm:gen_unicom_session_key
+UNICOM_ENCRYPTOR_SESSION_KEY_ALGID=
+UNICOM_ENCRYPTOR_SESSION_KEY_KEYID=
+UNICOM_ENCRYPTOR_SESSION_KEY_ENCRYPTED_SESSIONKEY=
 ```
 
 ##### 3.使用示例

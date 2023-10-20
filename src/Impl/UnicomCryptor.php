@@ -4,7 +4,6 @@ namespace Oh86\SmCryptor\Impl;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
 use Oh86\SmCryptor\Cryptor;
 use Oh86\SmCryptor\Exceptions\SmCryptorException;
 use Oh86\UnicomCryptor\Exceptions\CryptorException;
@@ -14,21 +13,39 @@ class UnicomCryptor implements Cryptor
 {
     private ClientV1 $clientV1;
     private string $sm4KeyIndex;
+    /**
+     * @var array{algID: int, keyID: string, encryptedSessionKey: string}
+     */
+    private array $sessionKeyContext;
 
     /**
-     * @param array{host: string, access_key: string, secret_key: string, sm4_key_index: string} $config
+     * @param array{host: string, access_key: string, secret_key: string, sm4_key_index: string, session_key_context: array} $config
      */
     public function __construct(array $config)
     {
         $this->sm4KeyIndex = Arr::pull($config, "sm4_key_index");
+        $this->sessionKeyContext = Arr::pull($config, "session_key_context");
         $this->clientV1 = new ClientV1($config);
     }
 
+    /**
+     * @return array{algID: int, keyID: string, encryptedSessionKey: string}
+     */
     protected function getSessionKeyContext(): array
     {
-        return Cache::remember("unicom_session_key_context", now()->addHour(), function (){
+        return $this->sessionKeyContext;
+    }
+
+    /**
+     * @throws SmCryptorException
+     */
+    public function genSessionKeyContext(): array
+    {
+        try {
             return $this->clientV1->generateKeyWithKek($this->sm4KeyIndex);
-        });
+        } catch (CryptorException $e) {
+            throw $this->toSmCryptorException($e);
+        }
     }
 
     public function sm3(string $text): string
@@ -57,7 +74,6 @@ class UnicomCryptor implements Cryptor
     {
         return new SmCryptorException($e->getMessage().":".$e->getResponseBody());
     }
-
 
     /**
      * @throws SmCryptorException

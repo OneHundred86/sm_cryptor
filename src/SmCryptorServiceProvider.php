@@ -4,6 +4,7 @@
 namespace Oh86\SmCryptor;
 
 use Illuminate\Support\ServiceProvider;
+use Oh86\SmCryptor\Commands\GenUnicomSessionKeyContext;
 
 class SmCryptorServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,12 @@ class SmCryptorServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/sm_cryptor.php' => config_path('sm_cryptor.php'),
         ]);
+
+        if ($this->app->runningInConsole()){
+            $this->commands([
+                GenUnicomSessionKeyContext::class,
+            ]);
+        }
     }
 }
 

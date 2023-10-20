@@ -27,5 +27,10 @@ return [
         "access_key" => env("UNICOM_ENCRYPTOR_AK"),
         "secret_key" => env("UNICOM_ENCRYPTOR_SK"),
         "sm4_key_index" => env("UNICOM_ENCRYPTOR_SM4_KEY_INDEX"),
+        "session_key_context" => [
+            "algID" => (int)env("UNICOM_ENCRYPTOR_SESSION_KEY_ALGID"),
+            "keyID" => env("UNICOM_ENCRYPTOR_SESSION_KEY_KEYID"),
+            "encryptedSessionKey" => env("UNICOM_ENCRYPTOR_SESSION_KEY_ENCRYPTED_SESSIONKEY"),
+        ],
     ],
 ];
