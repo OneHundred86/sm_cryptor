@@ -9,8 +9,8 @@ php artisan vendor:publish --provider='Oh86\SmCryptor\SmCryptorServiceProvider'
 # 国密驱动
 SM_CRYPTOR_DRIVER=local
 # 本地密钥
-SM4_KEY=4f17d993e1c602bc7cfa92377e223e6b    # hex，32位
-HMAC_KEY=7725db43aa18e3702719f9c15702a7cf   # hex
+SM4_KEY=4f17d993e1c602bc7cfa92377e223e6b
+HMAC_KEY=7725db43aa18e3702719f9c15702a7cf
 # 电信密码池
 TELECOM_ENCRYPTOR_HOST=https://36.140.66.11:9821
 TELECOM_EDS_NODE=

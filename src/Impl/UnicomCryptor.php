@@ -38,6 +38,7 @@ class UnicomCryptor implements Cryptor
 
     /**
      * @throws SmCryptorException
+     * @return array{algID: int, keyID: string, encryptedSessionKey: string}
      */
     public function genSessionKeyContext(): array
     {

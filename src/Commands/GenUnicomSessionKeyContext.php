@@ -45,6 +45,10 @@ class GenUnicomSessionKeyContext extends Command
             throw new \Exception("获取联通密码池对象错误");
         }
 
-        var_dump($unicom->genSessionKeyContext());
+        $skc = $unicom->genSessionKeyContext();
+
+        echo sprintf("UNICOM_ENCRYPTOR_SESSION_KEY_ALGID=%d", $skc["algID"]) . PHP_EOL;
+        echo sprintf("UNICOM_ENCRYPTOR_SESSION_KEY_KEYID=%s", $skc["keyID"]) . PHP_EOL;
+        echo sprintf("UNICOM_ENCRYPTOR_SESSION_KEY_ENCRYPTED_SESSIONKEY=%s", $skc["encryptedSessionKey"]) . PHP_EOL;
     }
 }
