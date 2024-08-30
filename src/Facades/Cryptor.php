@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Facade;
  * @method string hmacSm3(string $text)
  * @method string sm4Encrypt(string $text)
  * @method string sm4Decrypt(string $cipherText)
+ * @method extend(string $driver, \Closure $callback)
  */
 class Cryptor extends Facade
 {

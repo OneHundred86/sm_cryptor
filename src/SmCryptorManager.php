@@ -4,24 +4,40 @@
 namespace Oh86\SmCryptor;
 
 
+use Illuminate\Contracts\Foundation\Application;
 use Oh86\SmCryptor\Impl\LocalCryptor;
 use Oh86\SmCryptor\Impl\TelecomCryptor;
 use Oh86\SmCryptor\Impl\UnicomCryptor;
+use Closure;
 
 /**
  * @mixin Cryptor
  */
 class SmCryptorManager
 {
+    /**
+     * The application instance.
+     *
+     * @var Application
+     */
+    protected $app;
+
+
     private array $config;
 
     /**
-     * @var array<string => Cryptor>
+     * @var array<string, Cryptor>
      */
     private array $stores = [];
 
-    public function __construct(array $config)
+    /**
+     * @var array<string, Cryptor>
+     */
+    private array $customDriver = [];
+
+    public function __construct(Application $app,array $config)
     {
+        $this->app = $app;
         $this->config = $config;
     }
 
@@ -35,7 +51,12 @@ class SmCryptorManager
         $driver = $driver ?? $this->getDefaultDriver();
 
         if(!($entity = $this->stores[$driver] ?? null)){
-            $entity = $this->resolve($driver);
+            if ($callback = $this->customDriver[$driver] ?? null) {
+                $entity = $callback($this->app, $this->config[$driver]);
+            }else {
+                $entity = $this->resolve($driver);
+            }
+
             $this->stores[$driver] = $entity;
         }
 
@@ -53,6 +74,20 @@ class SmCryptorManager
         }
 
         throw new \RuntimeException("不支持该驱动: $driver");
+    }
+
+        /**
+     * Register a custom driver creator Closure.
+     *
+     * @param  string  $driver
+     * @param  \Closure  $callback
+     * @return $this
+     */
+    public function extend($driver, Closure $callback)
+    {
+        $this->customDriver[$driver] = $callback->bindTo($this, $this);
+
+        return $this;
     }
 
     /**
