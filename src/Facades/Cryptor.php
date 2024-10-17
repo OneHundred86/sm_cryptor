@@ -5,16 +5,17 @@ namespace Oh86\SmCryptor\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
+use Oh86\SmCryptor\SmCryptorManager;
 
 /**
  * Class Cryptor
  * @package Oh86\SmCryptor\Facades
- * @method \Oh86\SmCryptor\Cryptor driver(?string $driver)
- * @method string sm3(string $text)
- * @method string hmacSm3(string $text)
- * @method string sm4Encrypt(string $text)
- * @method string sm4Decrypt(string $cipherText)
- * @method extend(string $driver, \Closure $callback)
+ * @method static \Oh86\SmCryptor\Cryptor driver(?string $driver)
+ * @method static string sm3(string $text)
+ * @method static string hmacSm3(string $text)
+ * @method static string sm4Encrypt(string $text)
+ * @method static string sm4Decrypt(string $cipherText)
+ * @method static SmCryptorManager extend(string $driver, \Closure $callback)
  */
 class Cryptor extends Facade
 {
@@ -25,6 +26,6 @@ class Cryptor extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \Oh86\SmCryptor\SmCryptorManager::class;
+        return SmCryptorManager::class;
     }
 }
