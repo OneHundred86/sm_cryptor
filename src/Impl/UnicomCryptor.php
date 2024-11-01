@@ -4,12 +4,12 @@ namespace Oh86\SmCryptor\Impl;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Arr;
-use Oh86\SmCryptor\Cryptor;
+use Oh86\SmCryptor\AbstractCryptor;
 use Oh86\SmCryptor\Exceptions\SmCryptorException;
 use Oh86\UnicomCryptor\Exceptions\CryptorException;
 use Oh86\UnicomCryptor\V1\ClientV1;
 
-class UnicomCryptor implements Cryptor
+class UnicomCryptor extends AbstractCryptor
 {
     private ClientV1 $clientV1;
     private string $sm4KeyIndex;
@@ -73,7 +73,7 @@ class UnicomCryptor implements Cryptor
 
     protected function toSmCryptorException(CryptorException $e): SmCryptorException
     {
-        return new SmCryptorException($e->getMessage().":".$e->getResponseBody());
+        return new SmCryptorException($e->getMessage() . ":" . $e->getResponseBody());
     }
 
     /**

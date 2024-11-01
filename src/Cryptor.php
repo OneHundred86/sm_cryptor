@@ -10,4 +10,6 @@ interface Cryptor
     public function hmacSm3(string $text): string;
     public function sm4Encrypt(string $text): string;
     public function sm4Decrypt(string $cipherText): string;
+    public function sm2GenSign(string $text): string;
+    public function sm2VerifySign(string $text, string $sign): bool;
 }

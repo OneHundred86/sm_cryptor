@@ -5,14 +5,14 @@ namespace Oh86\SmCryptor\Impl;
 
 
 use GuzzleHttp\Exception\GuzzleException;
-use Oh86\SmCryptor\Cryptor;
+use Oh86\SmCryptor\AbstractCryptor;
 use Oh86\SmCryptor\Exceptions\SmCryptorException;
 use Oh86\TelecomCryptor\Exceptions\DecryptException;
 use Oh86\TelecomCryptor\Exceptions\EncryptException;
 use Oh86\TelecomCryptor\Exceptions\FetchTokenException;
 use Oh86\TelecomCryptor\Exceptions\HMACException;
 
-class TelecomCryptor implements Cryptor
+class TelecomCryptor extends AbstractCryptor
 {
     private \Oh86\TelecomCryptor\Cryptor $cryptor;
 

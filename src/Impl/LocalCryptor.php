@@ -6,10 +6,12 @@ namespace Oh86\SmCryptor\Impl;
 
 use Oh86\Sm\Exceptions\Exception;
 use Oh86\Sm\Sm4;
+use Oh86\SmCryptor\AbstractCryptor;
 use Oh86\SmCryptor\Cryptor;
 use Oh86\SmCryptor\Exceptions\SmCryptorException;
 
-class LocalCryptor implements Cryptor
+
+class LocalCryptor extends AbstractCryptor
 {
     private string $sm4Key;
     private string $hmacKey;
