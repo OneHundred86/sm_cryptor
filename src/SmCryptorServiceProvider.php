@@ -4,6 +4,7 @@
 namespace Oh86\SmCryptor;
 
 use Illuminate\Support\ServiceProvider;
+use Oh86\SmCryptor\Commands\GenLocalSm2Key;
 use Oh86\SmCryptor\Commands\GenUnicomSessionKeyContext;
 
 class SmCryptorServiceProvider extends ServiceProvider
@@ -19,7 +20,7 @@ class SmCryptorServiceProvider extends ServiceProvider
             return new SmCryptorManager($this->app, config("sm_cryptor"));
         });
 
-        $this->app->singleton(Cryptor::class, function (){
+        $this->app->singleton(Cryptor::class, function () {
             return app(SmCryptorManager::class)->driver();
         });
     }
@@ -27,14 +28,14 @@ class SmCryptorServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/sm_cryptor.php' => config_path('sm_cryptor.php'),
+            __DIR__ . '/../config/sm_cryptor.php' => config_path('sm_cryptor.php'),
         ]);
 
-        if ($this->app->runningInConsole()){
+        if ($this->app->runningInConsole()) {
             $this->commands([
                 GenUnicomSessionKeyContext::class,
+                GenLocalSm2Key::class,
             ]);
         }
     }
 }
-

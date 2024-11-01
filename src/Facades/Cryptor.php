@@ -18,6 +18,8 @@ use Oh86\SmCryptor\SmCryptorManager;
  * @method static string sm4Decrypt(string $cipherText)
  * @method static string sm2GenSign(string $text)
  * @method static bool sm2VerifySign(string $text, string $sign)
+ * @method static string sm2Encrypt(string $text)
+ * @method static string sm2Decrypt(string $cipherText)
  */
 class Cryptor extends Facade
 {

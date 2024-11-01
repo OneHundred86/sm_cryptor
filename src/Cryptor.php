@@ -12,4 +12,6 @@ interface Cryptor
     public function sm4Decrypt(string $cipherText): string;
     public function sm2GenSign(string $text): string;
     public function sm2VerifySign(string $text, string $sign): bool;
+    public function sm2Encrypt(string $text): string;
+    public function sm2Decrypt(string $cipherText): string;
 }

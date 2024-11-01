@@ -36,4 +36,14 @@ abstract class AbstractCryptor implements Cryptor
     {
         throw new NotImpletmentException("sm2VerifySign算法未实现");
     }
+
+    public function sm2Encrypt(string $text): string
+    {
+        throw new NotImpletmentException("sm2Encrypt算法未实现");
+    }
+
+    public function sm2Decrypt(string $cipherText): string
+    {
+        throw new NotImpletmentException("sm2Decrypt算法未实现");
+    }
 }
