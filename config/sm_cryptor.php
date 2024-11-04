@@ -35,4 +35,21 @@ return [
             "encryptedSessionKey" => env("UNICOM_ENCRYPTOR_SESSION_KEY_ENCRYPTED_SESSIONKEY"),
         ],
     ],
+
+    // gd移动密码池
+    "gdmobile" => [
+        "crypto" => [
+            "host" => env("GDMOBILE_CRYPTO_HOST"),
+            "app_id" => env("GDMOBILE_CRYPTO_APP_ID"),
+            "auth_token" => env("GDMOBILE_CRYPTO_AUTH_TOKEN"),
+            "sm4_key_index" => (int)env("GDMOBILE_CRYPTO_SM4_KEY_INDEX"),
+            "sm2_key_index" => (int)env("GDMOBILE_CRYPTO_SM2_KEY_INDEX"),
+        ],
+        "integrity" => [
+            "host" => env("GDMOBILE_INTEGRITY_HOST"),
+            "app_id" => env("GDMOBILE_INTEGRITY_APP_ID"),
+            "auth_token" => env("GDMOBILE_INTEGRITY_AUTH_TOKEN"),
+            "hmac_key_index" => (int)env("GDMOBILE_INTEGRITY_HMAC_KEY_INDEX"),
+        ],
+    ],
 ];

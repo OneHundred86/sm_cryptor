@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Oh86\SmCryptor\Impl\LocalCryptor;
 use Oh86\SmCryptor\Impl\TelecomCryptor;
 use Oh86\SmCryptor\Impl\UnicomCryptor;
+use Oh86\SmCryptor\Impl\GDMobileCryptor;
 use Closure;
 
 /**
@@ -35,7 +36,7 @@ class SmCryptorManager
      */
     private array $customDriver = [];
 
-    public function __construct(Application $app,array $config)
+    public function __construct(Application $app, array $config)
     {
         $this->app = $app;
         $this->config = $config;
@@ -50,10 +51,10 @@ class SmCryptorManager
     {
         $driver = $driver ?? $this->getDefaultDriver();
 
-        if(!($entity = $this->stores[$driver] ?? null)){
+        if (!($entity = $this->stores[$driver] ?? null)) {
             if ($callback = $this->customDriver[$driver] ?? null) {
                 $entity = $callback($this->app, $this->config[$driver]);
-            }else {
+            } else {
                 $entity = $this->resolve($driver);
             }
 
@@ -65,18 +66,20 @@ class SmCryptorManager
 
     public function resolve(string $driver = null): Cryptor
     {
-        if ($driver == "local"){
+        if ($driver == "local") {
             return new LocalCryptor($this->config[$driver]);
-        }elseif($driver == "telecom") {
+        } elseif ($driver == "telecom") {
             return new TelecomCryptor($this->config[$driver]);
-        }elseif($driver == "unicom"){
+        } elseif ($driver == "unicom") {
             return new UnicomCryptor($this->config[$driver]);
+        } elseif ($driver == "gdmobile") {
+            return new GDMobileCryptor($this->config[$driver]);
         }
 
         throw new \RuntimeException("不支持该驱动: $driver");
     }
 
-        /**
+    /**
      * Register a custom driver creator Closure.
      *
      * @param  string  $driver
