@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Oh86\SmCryptor;
-
 
 use Illuminate\Contracts\Foundation\Application;
 use Oh86\SmCryptor\Impl\LocalCryptor;
@@ -49,7 +47,7 @@ class SmCryptorManager
 
     public function driver(?string $driver = null): Cryptor
     {
-        $driver = $driver ?? $this->getDefaultDriver();
+        $driver ??= $this->getDefaultDriver();
 
         if (!($entity = $this->stores[$driver] ?? null)) {
             if ($callback = $this->customDriver[$driver] ?? null) {

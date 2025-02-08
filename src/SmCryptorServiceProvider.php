@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Oh86\SmCryptor;
 
 use Illuminate\Support\ServiceProvider;

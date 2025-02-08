@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Oh86\SmCryptor\Impl;
-
 
 use GuzzleHttp\Exception\GuzzleException;
 use Oh86\SmCryptor\AbstractCryptor;
