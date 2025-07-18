@@ -34,7 +34,11 @@ class SmCryptorManager
      */
     private array $customDriver = [];
 
-    public function __construct(Application $app, array $config)
+    /**
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param array $config
+     */
+    public function __construct(Application $app, $config)
     {
         $this->app = $app;
         $this->config = $config;
