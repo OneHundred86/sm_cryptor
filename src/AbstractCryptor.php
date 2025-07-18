@@ -46,4 +46,14 @@ abstract class AbstractCryptor implements Cryptor
     {
         throw new NotImpletmentException("sm2Decrypt算法未实现");
     }
+
+    public function ukeyImportCert(string $certificate, string $ukeyName): string
+    {
+        throw new NotImpletmentException("ukeyImportCert算法未实现");
+    }
+
+    public function ukeyVerifySign(string $certificateId, string $text, string $sign): bool
+    {
+        throw new NotImpletmentException("ukeyVerifySign算法未实现");
+    }
 }

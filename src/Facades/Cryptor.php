@@ -20,6 +20,8 @@ use Oh86\SmCryptor\SmCryptorManager;
  * @method static bool sm2VerifySign(string $text, string $sign)
  * @method static string sm2Encrypt(string $text)
  * @method static string sm2Decrypt(string $cipherText)
+ * @method static string ukeyImportCert(string $certificate, string $ukeyName)
+ * @method static bool ukeyVerifySign(string $certificateId, string $text, string $sign)
  */
 class Cryptor extends Facade
 {
