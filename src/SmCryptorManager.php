@@ -21,8 +21,10 @@ class SmCryptorManager
      */
     protected $app;
 
-
-    private array $config;
+    /**
+     * @var array
+     */
+    private $config;
 
     /**
      * @var array<string, Cryptor>
