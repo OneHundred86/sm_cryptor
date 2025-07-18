@@ -53,7 +53,7 @@ class GDMobileCryptor extends AbstractCryptor
             $base64 = $this->cryptoApi->sm3(base64_encode($text));
             return $this->base64ToHex($base64);
         } catch (HttpRequestException $e) {
-            Log::error(__METHOD__, $e->getMessage());
+            Log::error(__METHOD__, $e->errors());
             throw new SmCryptorException("SM3计算失败: " . $e->getMessage());
         }
     }
@@ -64,7 +64,7 @@ class GDMobileCryptor extends AbstractCryptor
             $base64 = $this->integrityApi->hmacSm3(base64_encode($text), $this->integrityConfig["hmac_key_index"]);
             return $this->base64ToHex($base64);
         } catch (HttpRequestException $e) {
-            Log::error(__METHOD__, $e->getMessage());
+            Log::error(__METHOD__, $e->errors());
             throw new SmCryptorException("HMAC-SM3计算失败: " . $e->getMessage());
         }
     }
@@ -78,7 +78,7 @@ class GDMobileCryptor extends AbstractCryptor
             $base64 = $this->cryptoApi->sm4Encrypt(base64_encode($text), $this->cryptoConfig["sm4_key_index"]);
             return $this->base64ToHex($base64);
         } catch (HttpRequestException $e) {
-            Log::error(__METHOD__, $e->getMessage());
+            Log::error(__METHOD__, $e->errors());
             throw new SmCryptorException("SM4加密失败: " . $e->getMessage());
         }
     }
@@ -92,7 +92,7 @@ class GDMobileCryptor extends AbstractCryptor
             $base64 = $this->cryptoApi->sm4Decrypt($this->hexToBase64($cipherText), $this->cryptoConfig["sm4_key_index"]);
             return base64_decode($base64);
         } catch (HttpRequestException $e) {
-            Log::error(__METHOD__, $e->getMessage());
+            Log::error(__METHOD__, $e->errors());
             throw new SmCryptorException("SM4解密失败: " . $e->getMessage());
         }
     }
@@ -106,7 +106,7 @@ class GDMobileCryptor extends AbstractCryptor
             $base64 = $this->cryptoApi->sm2Encrypt(base64_encode($text), $this->cryptoConfig["sm2_key_index"]);
             return $this->base64ToHex($base64);
         } catch (HttpRequestException $e) {
-            Log::error(__METHOD__, $e->getMessage());
+            Log::error(__METHOD__, $e->errors());
             throw new SmCryptorException("SM2加密失败: " . $e->getMessage());
         }
     }
@@ -120,7 +120,7 @@ class GDMobileCryptor extends AbstractCryptor
             $base64 = $this->cryptoApi->sm2Decrypt($this->hexToBase64($cipherText), $this->cryptoConfig["sm2_key_index"]);
             return base64_decode($base64);
         } catch (HttpRequestException $e) {
-            Log::error(__METHOD__, $e->getMessage());
+            Log::error(__METHOD__, $e->errors());
             throw new SmCryptorException("SM2解密失败: " . $e->getMessage());
         }
     }
