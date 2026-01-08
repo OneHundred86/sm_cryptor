@@ -15,7 +15,7 @@ class TelecomCryptor extends AbstractCryptor
     private \Oh86\TelecomCryptor\Cryptor $cryptor;
 
     /**
-     * @param array{host: string, ak: string, sk: string, eds_node: string, svs_node: string, sm4_key_index: int, hmac_key_index: int} $config
+     * @param array{host: string, ak: string, sk: string, eds_node: string, svs_node: string, sm4_key_index: string, hmac_key_index: string} $config
      */
     public function __construct(array $config)
     {
