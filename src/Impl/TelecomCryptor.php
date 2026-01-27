@@ -33,6 +33,10 @@ class TelecomCryptor extends AbstractCryptor
      */
     public function hmacSm3(string $text): string
     {
+        if (!$text) {
+            return "";
+        }
+
         try {
             return $this->cryptor->hmac($text, "SGD_SM3_HMAC");
         } catch (FetchTokenException $e) {
@@ -48,6 +52,10 @@ class TelecomCryptor extends AbstractCryptor
      */
     public function sm4Encrypt(string $text): string
     {
+        if (!$text) {
+            return "";
+        }
+
         try {
             return $this->cryptor->sm4Encrypt($text);
         } catch (EncryptException $e) {
@@ -63,6 +71,10 @@ class TelecomCryptor extends AbstractCryptor
      */
     public function sm4Decrypt(string $cipherText): string
     {
+        if (!$cipherText) {
+            return "";
+        }
+
         try {
             return $this->cryptor->sm4Decrypt($cipherText);
         } catch (DecryptException $e) {

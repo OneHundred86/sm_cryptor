@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 
 if (!function_exists('throw_if')) {
     /**
@@ -42,5 +44,19 @@ if (!function_exists('throw_unless')) {
         throw_if(!$condition, $exception, ...$parameters);
 
         return $condition;
+    }
+}
+
+if (!function_exists('now')) {
+    /**
+     * Get a Carbon instance for the current date and time.
+     *
+     * @param \DateTimeZone|string|null $tz
+     *
+     * @return static
+     */
+    function now($tz = null)
+    {
+        return Carbon::now($tz);
     }
 }
